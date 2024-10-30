@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: guestbooks-apps
+  name: bgd-apps
   namespace: openshift-gitops
 spec:
   goTemplate: true
@@ -14,7 +14,7 @@ spec:
               repoURL: https://github.com/automationiberia/argocd-stress-test.git
               revision: HEAD
               files:
-                - path: apps/helm-guestbook/guestbook-names.yaml
+                - path: apps/helm-helm-php81-bgd-alpine-names.yaml
           - list:
               elementsYaml: "{{ .key.components | toJson }}"
   template:
@@ -25,7 +25,7 @@ spec:
       source:
         repoURL: https://github.com/automationiberia/argocd-stress-test.git
         targetRevision: HEAD
-        path: apps/helm-guestbook/
+        path: apps/helm-php81-bgd-alpine/
       destination:
         server: https://kubernetes.default.svc
         namespace: argocd-stress-test
