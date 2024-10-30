@@ -5,8 +5,8 @@
 replicaCount: 1
 
 image:
-  repository: registry.redhat.io/rhel8/httpd-24
-  tag: 0.1
+  repository: quay.io/automationiberia/php81-bgd-alpine
+  tag: red
   pullPolicy: IfNotPresent
 
 containerPort: 80
