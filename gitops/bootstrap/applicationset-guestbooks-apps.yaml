@@ -14,7 +14,7 @@ spec:
               repoURL: https://github.com/automationiberia/argocd-stress-test.git
               revision: HEAD
               files:
-                - path: apps/helm-helm-php81-bgd-alpine-names.yaml
+                - path: apps/helm-php81-bgd-alpine/php81-bgd-alpine-names.yaml
           - list:
               elementsYaml: "{{ .key.components | toJson }}"
   template:
