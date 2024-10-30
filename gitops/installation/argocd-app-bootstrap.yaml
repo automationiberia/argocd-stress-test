@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: apps-bootstrap
+  name: bgd-bootstrap
   namespace: openshift-gitops
 spec:
   ignoreDifferences:
@@ -15,7 +15,31 @@ spec:
     namespace: openshift-gitops
     server: "https://kubernetes.default.svc"
   source:
-    path:  gitops/bootstrap
+    path:  gitops/bootstrap/bgd
+    repoURL: "https://github.com/automationiberia/argocd-stress-test.git"
+    targetRevision: "main"
+  project: default
+  syncPolicy:
+    automated: {}
+...
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: guestbook-bootstrap
+  namespace: openshift-gitops
+spec:
+  ignoreDifferences:
+  - kind: ServiceAccount
+    jsonPointers:
+    - /imagePullSecrets
+    - /secrets
+  destination:
+    name: ""
+    namespace: openshift-gitops
+    server: "https://kubernetes.default.svc"
+  source:
+    path:  gitops/bootstrap/guestbook
     repoURL: "https://github.com/automationiberia/argocd-stress-test.git"
     targetRevision: "main"
   project: default
