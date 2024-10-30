@@ -1,6 +1,6 @@
 # Argo CD Load Testing
 
-This repository contains an Argo CD setup for phased load testing by deploying multiple instances of a customized Nginx application. Each instance serves unique content based on its configuration.
+This repository contains an Argo CD setup for load testing by deploying multiple instances of a customized guestbook application. Each instance serves unique content based on its configuration.
 
 ## Directory Structure
 
@@ -49,7 +49,7 @@ $ vim group_vars/cluster1/vault.yaml
 $ vim group_vars/all/main.yml
 $ ansible-vault encrypt group_vars/*/vault.yaml
 ```
-## Create OCP object needed to deploy AAP, Pipelines and Quay
+## Create OCP object needed to deploy Openshift GitOps and bootstrap the applications
 
 ```
 $ ansible-navigator run bootstrap.yaml -i inventory -l cluster1 -m stdout --eei quay.io/automationiberia/ee-ocp-aap-iac-casc --vault-password-file .vault_password
