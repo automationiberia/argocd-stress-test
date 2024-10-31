@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "helm-php81-bgd-alpine.fullname" . }}-about-html
+  labels:
+    app: {{ template "helm-php81-bgd-alpine.name" . }}
+    chart: {{ template "helm-php81-bgd-alpine.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+data:
+  about.html: |
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <title>{{ .Release.Name }} - About</title>
+    </head>
+    <body>
+      <h1>About {{ template "helm-php81-bgd-alpine.name" . }}</h1>
+      <p>This is the about page for the {{ .Release.Name }} application.</p>
+    </body>
+    </html>

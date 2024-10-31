@@ -24,6 +24,26 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+      volumeMounts:
+        - name: home-html-volume
+          mountPath: /var/www/localhost/htdocs/home.html
+          subPath: home.html
+        - name: about-html-volume
+          mountPath: /var/www/localhost/htdocs/about.html
+          subPath: about.html
+        - name: contact-html-volume
+          mountPath: /var/www/localhost/htdocs/contact.html
+          subPath: contact.html
+      volumes:
+        - name: home-html-volume
+          configMap:
+            name: {{ template "helm-php81-bgd-alpine.fullname" . }}-home-html
+        - name: about-html-volume
+          configMap:
+            name: {{ template "helm-php81-bgd-alpine.fullname" . }}-about-html
+        - name: contact-html-volume
+          configMap:
+            name: {{ template "helm-php81-bgd-alpine.fullname" . }}-contact-html
           ports:
             - name: http
               containerPort: {{ .Values.containerPort }}
