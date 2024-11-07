@@ -68,6 +68,7 @@ $ ansible-navigator run bootstrap.yaml -i inventory -l cluster1 -m stdout --eei
 
 ## Force delete Argo CD APPs
 ```
+oc delete appset bgd-apps guestbook-apps
 oc patch  app $(oc get app| grep bgd|awk '{print $1}') -p '{"metadata":{"finalizers":[]}}' --type=merge
 oc patch  app $(oc get app| grep guest|awk '{print $1}') -p '{"metadata":{"finalizers":[]}}' --type=merge
 ```
