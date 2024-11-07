@@ -65,3 +65,9 @@ $ ansible-navigator run bootstrap.yaml -i inventory -l cluster1 -m stdout --eei
 |`aws_secret_key`|n/a|yes|Amazon Secret Key to access AWS API|'qKCYpd/jQX6gRhucQwIT1d2lzrapZ/O4lpEKGGqR'|
 |`aws_region`|n/a|yes|Amazon region where the S3 will be deploy it|'us-central-3'|
 
+
+## Force delete Argo CD APPs
+```
+oc patch  app $(oc get app| grep bgd|awk '{print $1}') -p '{"metadata":{"finalizers":[]}}' --type=merge
+oc patch  app $(oc get app| grep guest|awk '{print $1}') -p '{"metadata":{"finalizers":[]}}' --type=merge
+```
